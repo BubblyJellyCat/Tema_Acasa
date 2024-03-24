@@ -121,7 +121,6 @@ namespace Joc_Main
                 Console.WriteLine("Gresit. Raspunsul corect era a, Melcul.");
                 Console.ReadKey();
             }
-
             Console.Clear();
             Console.WriteLine("Intrebarea 5: Care animal este cel mai bun prieten al omului?");
             Console.WriteLine("a) Lupul");
