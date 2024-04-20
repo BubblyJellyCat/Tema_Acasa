@@ -9,6 +9,16 @@ namespace Joc_Main
 {
     class Joc
     {
+        [Flags]
+        public enum NuStiuInca
+        {
+            Pisica = 1,
+            Melcul = 2,
+            Lupul = 4,
+            Cainele = 8,
+        };
+
+        public const NuStiuInca AnimaleCompanie = NuStiuInca.Pisica & NuStiuInca.Cainele;
         static void Main(string[] args)
         {
             bool exit = false;
@@ -50,7 +60,8 @@ namespace Joc_Main
             Console.Write("Raspunsul tau: ");
             string answer1 = Console.ReadLine();
 
-            if (Verificare.VerifRaspuns("a", answer1))
+
+            if (Verificare.VerifRaspuns("a", answer1)) //note to future self: compara "a" cu "a" nu "elefant" cu "a".
             {
                 Console.WriteLine("Corect!");
                 Verificare.ScrieRezultat("Intrebarea 1: ", answer1);
@@ -141,10 +152,47 @@ namespace Joc_Main
                 Console.ReadKey();
             }
 
+            Console.Clear();
 
+            Console.WriteLine("Intrebarea 6: Care dintre urmatoarele animale sunt animale de companie?");
+            Console.WriteLine("1. Pisica ");
+            Console.WriteLine("2. Melcul ");
+            Console.WriteLine("3. Lupul ");
+            Console.WriteLine("4. Cainele ");
+            Console.WriteLine("\nScrieti raspunsurile cu virgula intre ele (ex. Pisica,Cainele)");
+            do
+            {
+                string answer6 = Console.ReadLine();
+                string[] raspunsuri6 = new string[6];
+                raspunsuri6 = answer6.Split(',');
+                NuStiuInca Raspunsuri6 = 0;
+                NuStiuInca Raspunsuri6Parse;
+                for (int i = 0; i < raspunsuri6.Length; i++)
+                {
+                    if (Enum.TryParse(raspunsuri6[i], out Raspunsuri6Parse))
+                    {
+                        Raspunsuri6 &= Raspunsuri6Parse;
+                    }
+                    else 
+                    {
+                        continue;
+                    }
+                }
 
+                if (Raspunsuri6 == AnimaleCompanie)
+                {
+                    Console.WriteLine("Da sunt animale de companie?!");
+                    Verificare.VerifRaspuns("a", "a");
+                    break;
 
-
+                }
+                else
+                {
+                    Console.WriteLine("Raspunsul este gresit");
+                    break;
+                }
+            }
+            while (true);
             Console.WriteLine($"\nFelicitari! Ai raspuns la {Verificare.Score} raspunsuri corect!");
             Console.ReadKey();
         }

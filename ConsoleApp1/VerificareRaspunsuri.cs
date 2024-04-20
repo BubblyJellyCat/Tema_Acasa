@@ -29,6 +29,7 @@ namespace Joc
             return false;
         }
 
+
         public void ScrieRezultat(string intrebare, string rasp)
         {
             using (StreamWriter writer = new StreamWriter(FilePath, true))
